@@ -5,3 +5,9 @@ const initialState = {
   completed: false,
   id: id()
 };
+
+const reducer = (currentState, action) => {
+  return currentState;
+};
+
+export { initialState, reducer };
