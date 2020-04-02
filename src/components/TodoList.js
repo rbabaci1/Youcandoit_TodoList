@@ -11,6 +11,15 @@ export default function TodoList() {
     <div className='todo-list'>
       <h1>todo list</h1>
 
+      <form>
+        <label>
+          Enter a Todo:
+          <input type='text' />
+        </label>
+
+        <button>Add</button>
+      </form>
+
       <ol>
         {todoList.map(todo => (
           <Todo todo={todo} key={id()} />
