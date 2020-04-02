@@ -8,10 +8,15 @@ const initialState = [
   }
 ];
 
-const ADD = 'ADD';
-
 const reducer = (currentState, action) => {
-  return currentState;
+  const { type, payload } = action;
+
+  switch (type) {
+    case 'addTodo':
+      return [...currentState, payload];
+    default:
+      return currentState;
+  }
 };
 
 export { reducer, initialState };

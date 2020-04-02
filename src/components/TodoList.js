@@ -10,10 +10,8 @@ export default function TodoList() {
 
   const addTodo = () => {
     dispatch({
-      type: 'ADD',
-      payload: {
-        item: todo
-      }
+      type: 'addTodo',
+      payload: { todo }
     });
   };
 
