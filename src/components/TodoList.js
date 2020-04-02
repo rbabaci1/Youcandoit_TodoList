@@ -6,13 +6,16 @@ import Todo from './Todo';
 
 export default function TodoList() {
   const [todoList, dispatch] = useReducer(reducer, initialState);
-  const [todo, setTodo] = useState('');
+  const [input, setInput] = useState('');
 
-  const addTodo = () => {
+  const addTodo = e => {
+    e.preventDefault();
+
     dispatch({
       type: 'addTodo',
-      payload: { todo }
+      payload: { input }
     });
+    setInput('');
   };
 
   return (
@@ -22,7 +25,11 @@ export default function TodoList() {
       <form onSubmit={addTodo}>
         <label>
           Enter a Todo:
-          <input type='text' onChange={e => setTodo(e.target.value)} />
+          <input
+            type='text'
+            value={input}
+            onChange={e => setInput(e.target.value)}
+          />
         </label>
 
         <button>Add</button>

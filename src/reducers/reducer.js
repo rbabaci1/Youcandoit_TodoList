@@ -13,7 +13,10 @@ const reducer = (currentState, action) => {
 
   switch (type) {
     case 'addTodo':
-      return [...currentState, payload];
+      return [
+        ...currentState,
+        { item: payload.input, completed: false, id: id() }
+      ];
     default:
       return currentState;
   }
