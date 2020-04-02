@@ -7,6 +7,15 @@ import Todo from './Todo';
 export default function TodoList() {
   const [todoList, dispatch] = useReducer(reducer, initialState);
 
+  const addTodo = todo => {
+    dispatch({
+      type: 'ADD',
+      payload: {
+        item: todo
+      }
+    });
+  };
+
   return (
     <div className='todo-list'>
       <h1>todo list</h1>
