@@ -25,12 +25,7 @@ export default function TodoList() {
     });
   };
 
-  const clearCompleted = id => {
-    dispatch({
-      type: 'clearCompleted',
-      payload: { id }
-    });
-  };
+  const clearCompleted = () => dispatch({ type: 'clearCompleted' });
 
   return (
     <div className='todo-list'>
@@ -55,7 +50,7 @@ export default function TodoList() {
         ))}
       </ol>
 
-      <button>Clear Completed</button>
+      <button onClick={clearCompleted}>Clear Completed</button>
     </div>
   );
 }

@@ -26,6 +26,9 @@ const reducer = (currentState, action) => {
         return todo;
       });
     }
+    case 'clearCompleted': {
+      return currentState.filter(todo => !todo.completed);
+    }
     default:
       return currentState;
   }
