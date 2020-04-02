@@ -18,6 +18,13 @@ export default function TodoList() {
     setInput('');
   };
 
+  const toggleTodo = id => {
+    dispatch({
+      type: 'toggleCompleted',
+      payload: { id }
+    });
+  };
+
   return (
     <div className='todo-list'>
       <h1>todo list</h1>
@@ -37,7 +44,7 @@ export default function TodoList() {
 
       <ol>
         {todoList.map(todo => (
-          <Todo todo={todo} key={id()} />
+          <Todo key={id()} todo={todo} toggleTodo={toggleTodo} />
         ))}
       </ol>
     </div>
