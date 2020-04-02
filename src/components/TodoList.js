@@ -8,7 +8,7 @@ export default function TodoList() {
   const [todoList, dispatch] = useReducer(reducer, initialState);
   const [todo, setTodo] = useState('');
 
-  const addTodo = todo => {
+  const addTodo = () => {
     dispatch({
       type: 'ADD',
       payload: {
@@ -21,10 +21,10 @@ export default function TodoList() {
     <div className='todo-list'>
       <h1>todo list</h1>
 
-      <form>
+      <form onSubmit={addTodo}>
         <label>
           Enter a Todo:
-          <input type='text' />
+          <input type='text' onChange={e => setTodo(e.target.value)} />
         </label>
 
         <button>Add</button>
