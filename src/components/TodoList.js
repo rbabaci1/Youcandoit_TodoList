@@ -11,9 +11,11 @@ export default function TodoList() {
     <div className='todo-list'>
       <h1>todo list</h1>
 
-      {todoList.map(todo => (
-        <Todo todo={todo} key={id()} />
-      ))}
+      <ol>
+        {todoList.map(todo => (
+          <Todo todo={todo} key={id()} />
+        ))}
+      </ol>
     </div>
   );
 }
