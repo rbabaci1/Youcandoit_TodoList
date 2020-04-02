@@ -1,5 +1,11 @@
-import React from 'react';
+import React, { useReducer } from 'react';
+
+import Todo from './Todo';
 
 export default function TodoList() {
-  return <div></div>;
+  return (
+    <div className='todo-list'>
+      <h1>todo list</h1>
+    </div>
+  );
 }
