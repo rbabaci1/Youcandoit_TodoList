@@ -25,6 +25,13 @@ export default function TodoList() {
     });
   };
 
+  const clearCompleted = id => {
+    dispatch({
+      type: 'clearCompleted',
+      payload: { id }
+    });
+  };
+
   return (
     <div className='todo-list'>
       <h1>todo list</h1>
@@ -47,6 +54,8 @@ export default function TodoList() {
           <Todo key={id()} todo={todo} toggleTodo={toggleTodo} />
         ))}
       </ol>
+
+      <button>Clear Completed</button>
     </div>
   );
 }
