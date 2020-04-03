@@ -16,7 +16,7 @@ export default function TodoList() {
 
     dispatch({
       type: 'addTodo',
-      payload: { input },
+      payload: { input, dueDate },
     });
     setInput('');
   };

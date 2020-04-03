@@ -8,6 +8,9 @@ const initialState = [
     id: id(),
   },
 ];
+const getLocalTime = (date) => {
+  return [date.toLocaleDateString(), date.toLocaleTimeString()].join(' ');
+};
 
 const reducer = (currentState, action) => {
   const { type, payload } = action;
@@ -16,7 +19,12 @@ const reducer = (currentState, action) => {
     case 'addTodo': {
       return [
         ...currentState,
-        { item: payload.input, completed: false, id: id() },
+        {
+          item: payload.input,
+          completed: false,
+          dueDate: getLocalTime(payload.dueDate),
+          id: id(),
+        },
       ];
     }
     case 'toggleCompleted': {
