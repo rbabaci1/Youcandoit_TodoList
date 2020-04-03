@@ -51,7 +51,9 @@ export default function TodoList() {
         ))}
       </ol>
 
-      <button onClick={clearCompleted}>Clear Completed</button>
+      <button className='clear-btn' onClick={clearCompleted}>
+        Clear Completed
+      </button>
     </div>
   );
 }

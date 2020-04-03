@@ -52,6 +52,8 @@ code {
     list-style: none;
     counter-reset: item;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
 
     section {
       display: flex;
@@ -59,7 +61,7 @@ code {
       align-items: center;
       width: fit-content;
       padding: 5px;
-      margin: 10px 0;
+      margin: 15px 10px 0 0;
       background-color: rgba(199, 169, 69, 0.8);
       border-top-right-radius: 20px;
       border-bottom-right-radius: 20px;
@@ -76,7 +78,6 @@ code {
         font-family: 'Comic Neue';
         font-size: 28px;
         counter-increment: item;
-        margin-bottom: 5px;
 
         &:before {
           margin-right: 5px;
@@ -98,7 +99,7 @@ code {
   }
   button {
     font-size: 22px;
-    padding: 3px 15px;
+    padding: 5px 15px;
     border-radius: 2px;
     background-color: rgb(175, 174, 174);
     border: none;
@@ -108,6 +109,10 @@ code {
       transition: 0.5s;
       background-color: gray;
     }
+  }
+  .clear-btn {
+    background-color: rgb(236, 213, 150);
+    margin: 10px 0;
   }
 }
 .completed {
