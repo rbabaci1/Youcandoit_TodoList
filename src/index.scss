@@ -17,19 +17,56 @@ code {
 }
 
 .todo-list {
+  h1 {
+    text-align: center;
+    font-family: 'Comic Neue';
+    font-size: 54px;
+    margin: 15px 0;
+  }
+
+  form {
+    background-color: rgba(10, 95, 69, 0.6);
+    width: fit-content;
+    padding: 10px 20px;
+
+    label {
+      font-size: 24px;
+      color: #fff;
+
+      input {
+        font-size: 28px;
+        margin-left: 10px;
+        background-color: inherit;
+        border: none;
+        border-bottom: 2px solid gold;
+        outline: none;
+        color: orange;
+        font-family: 'Comic Neue';
+        font-weight: 500;
+        letter-spacing: 1px;
+      }
+    }
+  }
+
   ol {
-    background-color: rgba(199, 169, 69, 0.8);
+    list-style: none;
+    counter-reset: item;
+    padding: 0;
 
     section {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      width: fit-content;
       padding: 5px;
       margin: 10px 0;
+      background-color: rgba(199, 169, 69, 0.8);
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
 
       &:hover {
         transition: 0.5s;
-        background-color: rgba(158, 127, 26, 0.5);
+        background-color: rgba(155, 115, 30, 0.8);
         cursor: pointer;
       }
 
@@ -37,13 +74,39 @@ code {
         cursor: pointer;
         margin-right: 10px;
         font-family: 'Comic Neue';
-        font-weight: 500;
         font-size: 28px;
+        counter-increment: item;
+        margin-bottom: 5px;
+
+        &:before {
+          margin-right: 5px;
+          content: counter(item);
+          background: rgb(70, 102, 83);
+          border-radius: 100%;
+          color: white;
+          width: 1.2em;
+          text-align: center;
+          display: inline-block;
+        }
       }
       span {
-        color: #fff;
         font-size: 18px;
+        font-weight: bold;
+        margin-left: 5px;
       }
+    }
+  }
+  button {
+    font-size: 22px;
+    padding: 3px 15px;
+    border-radius: 2px;
+    background-color: rgb(175, 174, 174);
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      transition: 0.5s;
+      background-color: gray;
     }
   }
 }

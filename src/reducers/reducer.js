@@ -24,7 +24,7 @@ const reducer = (currentState, action) => {
           return {
             ...todo,
             completed: !todo.completed,
-            time: !todo.completed ? payload.time : '',
+            time: !todo.completed ? `Completed on ${payload.time}` : '',
           };
         }
         return todo;
