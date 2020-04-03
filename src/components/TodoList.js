@@ -7,6 +7,7 @@ import Todo from './Todo';
 export default function TodoList() {
   const [todoList, dispatch] = useReducer(reducer, initialState);
   const [input, setInput] = useState('');
+  const [dueDate, setDueDate] = useState('');
 
   const addTodo = (e) => {
     e.preventDefault();

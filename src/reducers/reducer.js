@@ -4,6 +4,7 @@ const initialState = [
   {
     item: 'Learn about reducers',
     completed: false,
+    dueDate: '',
     id: id(),
   },
 ];
