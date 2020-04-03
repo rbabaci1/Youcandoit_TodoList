@@ -4,8 +4,8 @@ const initialState = [
   {
     item: 'Learn about reducers',
     completed: false,
-    id: id()
-  }
+    id: id(),
+  },
 ];
 
 const reducer = (currentState, action) => {
@@ -15,19 +15,23 @@ const reducer = (currentState, action) => {
     case 'addTodo': {
       return [
         ...currentState,
-        { item: payload.input, completed: false, id: id() }
+        { item: payload.input, completed: false, id: id() },
       ];
     }
     case 'toggleCompleted': {
-      return currentState.map(todo => {
+      return currentState.map((todo) => {
         if (todo.id === payload.id) {
-          return { ...todo, completed: !todo.completed };
+          return {
+            ...todo,
+            completed: !todo.completed,
+            time: !todo.completed ? payload.time : '',
+          };
         }
         return todo;
       });
     }
     case 'clearCompleted': {
-      return currentState.filter(todo => !todo.completed);
+      return currentState.filter((todo) => !todo.completed);
     }
     default:
       return currentState;

@@ -8,20 +8,20 @@ export default function TodoList() {
   const [todoList, dispatch] = useReducer(reducer, initialState);
   const [input, setInput] = useState('');
 
-  const addTodo = e => {
+  const addTodo = (e) => {
     e.preventDefault();
 
     dispatch({
       type: 'addTodo',
-      payload: { input }
+      payload: { input },
     });
     setInput('');
   };
 
-  const toggleTodo = id => {
+  const toggleTodo = (id, time) => {
     dispatch({
       type: 'toggleCompleted',
-      payload: { id }
+      payload: { id, time },
     });
   };
 
@@ -37,7 +37,7 @@ export default function TodoList() {
           <input
             type='text'
             value={input}
-            onChange={e => setInput(e.target.value)}
+            onChange={(e) => setInput(e.target.value)}
           />
         </label>
 
@@ -45,7 +45,7 @@ export default function TodoList() {
       </form>
 
       <ol>
-        {todoList.map(todo => (
+        {todoList.map((todo) => (
           <Todo key={id()} todo={todo} toggleTodo={toggleTodo} />
         ))}
       </ol>
