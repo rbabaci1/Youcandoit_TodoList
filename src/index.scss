@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+  height: 100vh;
   background-image: url('https://cdn.pixabay.com/photo/2015/01/07/16/37/wood-591631_1280.jpg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -28,6 +28,8 @@ code {
     background-color: rgba(10, 95, 69, 0.6);
     width: fit-content;
     padding: 10px 20px;
+    display: flex;
+    flex-wrap: wrap;
 
     label {
       font-size: 24px;
@@ -44,6 +46,28 @@ code {
         font-family: 'Comic Neue';
         font-weight: 500;
         letter-spacing: 1px;
+      }
+    }
+
+    .react-datetime-picker__wrapper {
+      border: 1px solid gold;
+      margin-left: 15px;
+      font-size: bold;
+
+      input {
+        color: #fff;
+      }
+      .react-datetime-picker__inputGroup__amPm {
+        color: yellow;
+      }
+      span {
+        font-size: 20px;
+      }
+      .react-datetime-picker__inputGroup {
+        width: 200px;
+      }
+      button {
+        margin-left: 5px;
       }
     }
   }

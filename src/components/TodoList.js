@@ -1,5 +1,6 @@
 import React, { useReducer, useState } from 'react';
 import { v4 as id } from 'uuid';
+import DateTimePicker from 'react-datetime-picker';
 
 import { reducer, initialState } from '../reducers/reducer';
 import Todo from './Todo';
@@ -7,7 +8,8 @@ import Todo from './Todo';
 export default function TodoList() {
   const [todoList, dispatch] = useReducer(reducer, initialState);
   const [input, setInput] = useState('');
-  const [dueDate, setDueDate] = useState('');
+
+  const [dueDate, setDueDate] = useState(new Date());
 
   const addTodo = (e) => {
     e.preventDefault();
@@ -43,6 +45,8 @@ export default function TodoList() {
         </label>
 
         <button>Add</button>
+
+        <DateTimePicker onChange={(e) => setDueDate(e)} value={dueDate} />
       </form>
 
       <ol>
