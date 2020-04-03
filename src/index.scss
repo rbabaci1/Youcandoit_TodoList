@@ -16,22 +16,20 @@ code {
     monospace;
 }
 
-.completed {
-  text-decoration: line-through;
-}
-
 .todo-list {
   ol {
-    background-color: rgba(180, 179, 74, 0.8);
+    background-color: rgba(199, 169, 69, 0.8);
 
     section {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 5px;
+      margin: 10px 0;
 
       &:hover {
-        background-color: rgba(93, 151, 161, 0.5);
+        transition: 0.5s;
+        background-color: rgba(158, 127, 26, 0.5);
         cursor: pointer;
       }
 
@@ -40,7 +38,7 @@ code {
         margin-right: 10px;
         font-family: 'Comic Neue';
         font-weight: 500;
-        font-size: 26px;
+        font-size: 28px;
       }
       span {
         color: #fff;
@@ -48,4 +46,8 @@ code {
       }
     }
   }
+}
+.completed {
+  text-decoration: line-through;
+  color: rgb(77, 75, 75);
 }
