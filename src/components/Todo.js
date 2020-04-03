@@ -3,7 +3,7 @@ import now from 'moment';
 
 export default function Todo({ todo, toggleTodo }) {
   return (
-    <>
+    <section>
       <li
         className={todo.completed ? 'completed' : ''}
         onClick={() =>
@@ -12,7 +12,8 @@ export default function Todo({ todo, toggleTodo }) {
       >
         {todo.item}
       </li>
+
       <span>{todo.time}</span>
-    </>
+    </section>
   );
 }
