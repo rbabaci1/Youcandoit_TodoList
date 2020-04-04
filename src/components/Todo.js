@@ -5,13 +5,16 @@ import { getLocalTime } from '../reducers/reducer';
 export default function Todo({ todo, toggleTodo }) {
   const [currentTime, setCurrentTime] = useState(getLocalTime(new Date()));
 
-  useEffect(() => {
-    let id = setInterval(() => {
-      setCurrentTime(getLocalTime(new Date()));
-    }, 1000);
+  // useEffect(() => {
+  // //   let id = setInterval(() => {
+  // //     setCurrentTime(getLocalTime(new Date()));
+  // //   }, 1000);
+  // //   if (todo.dueDate === currentTime && !todo.isDue) {
+  // //     toggleDue(true);
+  // //   }
 
-    return () => clearInterval(id);
-  }, [currentTime]);
+  // //   return () => clearInterval(id);
+  // // }, [currentTime]);
 
   return (
     <section
@@ -22,8 +25,7 @@ export default function Todo({ todo, toggleTodo }) {
       <span>{todo.time}</span>
 
       <span id='due-message'>
-        {/* {todo.dueDate === currentTime && !todo.completed && 'Pass due date!!!'} */}
-        {todo.dueDate === currentTime && 'Pass due date!!!'}
+        {todo.dueDate === currentTime && !todo.completed && 'Pass due date!!!'}
       </span>
     </section>
   );

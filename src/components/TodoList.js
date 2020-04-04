@@ -10,6 +10,7 @@ export default function TodoList() {
 
   const [input, setInput] = useState('');
   const [dueDate, setDueDate] = useState(new Date());
+  console.log(dueDate);
 
   const addTodo = (e) => {
     e.preventDefault();
@@ -31,8 +32,6 @@ export default function TodoList() {
   };
 
   const clearCompleted = () => dispatch({ type: 'clearCompleted' });
-
-  const toggleDue = (id) => dispatch({ type: 'toggleDue', payload: { id } });
 
   return (
     <div className='todo-list'>
