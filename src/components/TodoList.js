@@ -45,8 +45,10 @@ export default function TodoList() {
         </label>
 
         <button>Add</button>
-
-        <DateTimePicker onChange={(e) => setDueDate(e)} value={dueDate} />
+        <div className='date-time'>
+          Enter a due date:
+          <DateTimePicker onChange={(e) => setDueDate(e)} value={dueDate} />
+        </div>
       </form>
 
       <ol>

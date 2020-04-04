@@ -49,25 +49,58 @@ code {
       }
     }
 
-    .react-datetime-picker__wrapper {
-      border: 1px solid gold;
+    .date-time {
+      color: #fff;
       margin-left: 15px;
-      font-size: bold;
+      font-size: 24px;
 
-      input {
-        color: #fff;
+      .react-datetime-picker__wrapper {
+        border: 1px solid gold;
+        font-size: bold;
+        margin-left: 15px;
+
+        input {
+          color: #fff;
+          cursor: pointer;
+
+          &:hover {
+            color: gold;
+          }
+        }
+        .react-datetime-picker__inputGroup__amPm {
+          color: yellow;
+        }
+        span {
+          font-size: 20px;
+        }
+
+        button {
+          margin-left: 5px;
+        }
+
+        @media (max-width: 615px) {
+          margin: 3px 0 0 0;
+        }
       }
-      .react-datetime-picker__inputGroup__amPm {
-        color: yellow;
+
+      @media (max-width: 1115px) {
+        margin: 20px 0 0 0;
       }
-      span {
-        font-size: 20px;
+      @media (max-width: 615px) {
+        font-size: 18px;
       }
-      .react-datetime-picker__inputGroup {
-        width: 200px;
-      }
-      button {
-        margin-left: 5px;
+    }
+
+    @media (max-width: 615px) {
+      padding: 5px;
+
+      label {
+        font-size: 18px;
+
+        input {
+          font-size: 22px;
+          width: 180px;
+        }
       }
     }
   }
@@ -113,11 +146,18 @@ code {
           text-align: center;
           display: inline-block;
         }
+        @media (max-width: 615px) {
+          font-size: 22px;
+        }
       }
       span {
         font-size: 18px;
         font-weight: bold;
         margin-left: 5px;
+
+        @media (max-width: 615px) {
+          font-size: 15px;
+        }
       }
     }
   }
@@ -133,10 +173,16 @@ code {
       transition: 0.5s;
       background-color: gray;
     }
+
+    @media (max-width: 615px) {
+      font-size: 18px;
+      padding: 3px 8px;
+    }
   }
   .clear-btn {
     background-color: rgb(236, 213, 150);
     margin: 10px 0;
+    padding: 5px 10px;
   }
 }
 .completed {
