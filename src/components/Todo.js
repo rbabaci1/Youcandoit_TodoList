@@ -8,7 +8,7 @@ export default function Todo({ todo, toggleTodo }) {
   useEffect(() => {
     let id = setInterval(() => {
       setCurrentTime(getLocalTime(new Date()));
-    }, 100);
+    }, 1000);
 
     return () => clearInterval(id);
   }, [currentTime]);
@@ -22,7 +22,8 @@ export default function Todo({ todo, toggleTodo }) {
       <span>{todo.time}</span>
 
       <span id='due-message'>
-        {todo.dueDate === currentTime && !todo.completed && 'Pass due date!!!'}
+        {/* {todo.dueDate === currentTime && !todo.completed && 'Pass due date!!!'} */}
+        {todo.dueDate === currentTime && 'Pass due date!!!'}
       </span>
     </section>
   );

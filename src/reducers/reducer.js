@@ -5,6 +5,7 @@ const initialState = [
     item: 'Learn about reducers',
     completed: false,
     dueDate: 'none',
+    isDue: false,
     id: id(),
   },
 ];
@@ -26,6 +27,7 @@ const reducer = (currentState, action) => {
           item: payload.input,
           completed: false,
           dueDate: getLocalTime(payload.dueDate),
+          isDue: false,
           id: id(),
         },
       ];
@@ -44,6 +46,17 @@ const reducer = (currentState, action) => {
     }
     case 'clearCompleted': {
       return currentState.filter((todo) => !todo.completed);
+    }
+    case 'toggleDue': {
+      return currentState.map((todo) => {
+        if (todo.id === payload.id) {
+          return {
+            ...todo,
+            isDue: true,
+          };
+        }
+        return todo;
+      });
     }
     default:
       return currentState;

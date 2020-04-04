@@ -7,8 +7,8 @@ import Todo from './Todo';
 
 export default function TodoList() {
   const [todoList, dispatch] = useReducer(reducer, initialState);
-  const [input, setInput] = useState('');
 
+  const [input, setInput] = useState('');
   const [dueDate, setDueDate] = useState(new Date());
 
   const addTodo = (e) => {
@@ -31,6 +31,8 @@ export default function TodoList() {
   };
 
   const clearCompleted = () => dispatch({ type: 'clearCompleted' });
+
+  const toggleDue = (id) => dispatch({ type: 'toggleDue', payload: { id } });
 
   return (
     <div className='todo-list'>
