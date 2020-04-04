@@ -4,7 +4,7 @@ const initialState = [
   {
     item: 'Learn about reducers',
     completed: false,
-    dueDate: '',
+    dueDate: 'none',
     id: id(),
   },
 ];
@@ -50,4 +50,4 @@ const reducer = (currentState, action) => {
   }
 };
 
-export { reducer, initialState };
+export { reducer, initialState, getLocalTime };
