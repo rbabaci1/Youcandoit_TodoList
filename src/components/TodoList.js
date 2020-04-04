@@ -10,7 +10,6 @@ export default function TodoList() {
 
   const [input, setInput] = useState('');
   const [dueDate, setDueDate] = useState(new Date());
-  console.log(dueDate);
 
   const addTodo = (e) => {
     e.preventDefault();
@@ -49,7 +48,7 @@ export default function TodoList() {
 
         <button>Add</button>
         <div className='date-time'>
-          Enter a due date:
+          Add a due date:
           <DateTimePicker onChange={(e) => setDueDate(e)} value={dueDate} />
         </div>
       </form>
