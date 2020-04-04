@@ -9,7 +9,10 @@ const initialState = [
   },
 ];
 const getLocalTime = (date) => {
-  return [date.toLocaleDateString(), date.toLocaleTimeString()].join(' ');
+  return [
+    date.toLocaleDateString(),
+    date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+  ].join(' ');
 };
 
 const reducer = (currentState, action) => {

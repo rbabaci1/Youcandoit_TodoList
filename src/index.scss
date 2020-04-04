@@ -113,10 +113,6 @@ code {
     flex-wrap: wrap;
 
     section {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: fit-content;
       padding: 5px;
       margin: 15px 10px 0 0;
       background-color: rgba(199, 169, 69, 0.8);
@@ -151,9 +147,12 @@ code {
         }
       }
       span {
-        font-size: 18px;
+        display: inline-block;
+        font-size: 17px;
         font-weight: bold;
         margin-left: 5px;
+        padding: 3px;
+        text-decoration: underline;
 
         @media (max-width: 615px) {
           font-size: 15px;

@@ -14,11 +14,13 @@ export default function TodoList() {
   const addTodo = (e) => {
     e.preventDefault();
 
-    dispatch({
-      type: 'addTodo',
-      payload: { input, dueDate },
-    });
-    setInput('');
+    if (input.length > 0) {
+      dispatch({
+        type: 'addTodo',
+        payload: { input, dueDate },
+      });
+      setInput('');
+    }
   };
 
   const toggleTodo = (id, time) => {
