@@ -1,29 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import now from 'moment';
 import { getLocalTime } from '../reducers/reducer';
 
-export default function Todo({ todo, toggleTodo }) {
-  const [currentDate, setCurrentDate] = useState(getLocalTime(new Date()));
+export default class Todo extends Component {
+  state = {
+    currentDate: getLocalTime(new Date()),
+  };
 
-  useEffect(() => {
-    const intervalID = setInterval(() => {
-      setCurrentDate(getLocalTime(new Date()));
+  render() {
+    const { todo, toggleTodo } = this.props;
 
-      return () => clearInterval(intervalID);
-    }, 1000);
-  }, [currentDate]);
+    return (
+      <section
+        onClick={() =>
+          toggleTodo(todo.id, now().format('MMMM Do YYYY @ h:mm a'))
+        }
+      >
+        <li className={todo.completed ? 'completed' : ''}>{todo.item}</li>
+        {console.log('render in Todo')}
 
-  return (
-    <section
-      onClick={() => toggleTodo(todo.id, now().format('MMMM Do YYYY @ h:mm a'))}
-    >
-      <li className={todo.completed ? 'completed' : ''}>{todo.item}</li>
+        <span>{todo.time}</span>
 
-      <span>{todo.time}</span>
-
-      <span id='due-message'>
-        {todo.dueDate === 'none' && !todo.completed && 'Pass due date!!!'}
-      </span>
-    </section>
-  );
+        <span id='due-message'>
+          {todo.dueDate === this.state.currentDate &&
+            !todo.completed &&
+            'Pass due date!!!'}
+        </span>
+      </section>
+    );
+  }
 }

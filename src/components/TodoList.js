@@ -23,18 +23,22 @@ export default function TodoList() {
     }
   };
 
-  const toggleTodo = (id, time) => {
-    dispatch({
-      type: 'toggleCompleted',
-      payload: { id, time },
-    });
-  };
+  const toggleTodo = React.useCallback(
+    (id, time) => {
+      dispatch({
+        type: 'toggleCompleted',
+        payload: { id, time },
+      });
+    },
+    [dispatch]
+  );
 
   const clearCompleted = () => dispatch({ type: 'clearCompleted' });
 
   return (
     <div className='todo-list'>
       <h1>todo list</h1>
+      {console.log('render in TodoList')}
 
       <form onSubmit={addTodo}>
         <label>
