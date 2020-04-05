@@ -12,7 +12,7 @@ const initialState = {
     },
   ],
 };
-const getLocalTime = (date) => {
+const getLocalDate = (date) => {
   return [
     date.toLocaleDateString(),
     date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
@@ -23,7 +23,7 @@ const reducer = (currentState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case 'todo input': {
+    case 'update user input': {
       return {
         ...currentState,
         itemInput: payload.input,
@@ -36,35 +36,37 @@ const reducer = (currentState, action) => {
           {
             item: currentState.itemInput,
             completed: false,
-            dueDate: getLocalTime(payload.dueDate),
+            dueDate: getLocalDate(payload.dueDate),
             isDue: false,
             id: id(),
           },
         ],
       };
     }
-    case 'toggleCompleted': {
+    case 'mark todo completed': {
       return {
         ...currentState,
         todoList: currentState.todoList.map((todo) => {
-          if (todo.id === payload.id) {
+          if (todo.id === payload.todoId) {
             return {
               ...todo,
               completed: !todo.completed,
-              time: !todo.completed ? `on ${payload.time}` : '',
+              completedDate: !todo.completed
+                ? `on ${payload.completedDate}`
+                : '',
             };
           }
           return todo;
         }),
       };
     }
-    case 'clearCompleted': {
+    case 'clear completed todos': {
       return {
         ...currentState,
         todoList: currentState.todoList.filter((todo) => !todo.completed),
       };
     }
-    case 'is due': {
+    case 'check due date': {
       return {
         ...currentState,
         todoList: currentState.todoList.map((todo) => {
@@ -80,4 +82,4 @@ const reducer = (currentState, action) => {
   }
 };
 
-export { reducer, initialState, getLocalTime };
+export { reducer, initialState, getLocalDate };

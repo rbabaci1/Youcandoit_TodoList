@@ -2,21 +2,21 @@ import React, { useReducer, useState, useEffect } from 'react';
 import { v4 as id } from 'uuid';
 import DateTimePicker from 'react-datetime-picker';
 
-import { reducer, initialState, getLocalTime } from '../reducers/reducer';
+import { reducer, initialState, getLocalDate } from '../reducers/reducer';
 import Todo from './Todo';
 
 export default function TodoList() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [currDate, setCurrDate] = useState(getLocalTime(new Date()));
+  const [currDate, setCurrDate] = useState(getLocalDate(new Date()));
   const [dueDate, setDueDate] = useState(new Date());
 
   useEffect(() => {
     const id = setInterval(() => {
-      setCurrDate(getLocalTime(new Date()));
+      setCurrDate(getLocalDate(new Date()));
     }, 1000);
 
     dispatch({
-      type: 'is due',
+      type: 'check due date',
       payload: { currDate },
     });
 
@@ -32,20 +32,20 @@ export default function TodoList() {
         payload: { dueDate },
       });
       dispatch({
-        type: 'todo input',
+        type: 'update user input',
         payload: { input: '' },
       });
     }
   };
 
-  const toggleTodo = (id, time) => {
+  const toggleTodo = (todoId, completedDate) => {
     dispatch({
-      type: 'toggleCompleted',
-      payload: { id, time },
+      type: 'mark todo completed',
+      payload: { todoId, completedDate },
     });
   };
 
-  const clearCompleted = () => dispatch({ type: 'clearCompleted' });
+  const clearCompleted = () => dispatch({ type: 'clear completed todos' });
 
   return (
     <div className='todo-list'>

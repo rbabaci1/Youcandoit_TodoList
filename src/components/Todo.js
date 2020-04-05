@@ -1,22 +1,23 @@
 import React from 'react';
 import now from 'moment';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 
 export default function Todo({ todo, toggleTodo }) {
+  const currentDate = now().format('MMMM Do YYYY @ h:mm a');
+
   return (
-    <section
-      onClick={() => toggleTodo(todo.id, now().format('MMMM Do YYYY @ h:mm a'))}
-    >
+    <section onClick={() => toggleTodo(todo.id, currentDate)}>
       <li className={todo.completed ? 'completed' : ''}>{todo.item}</li>
       {console.log('render in Todo')}
 
-      <span>
-        {todo.completed && <CheckCircleIcon />}
-        {todo.time}
-      </span>
+      {todo.completed && (
+        <span>
+          <CheckCircleIcon />
+          {todo.completedDate}
+        </span>
+      )}
 
-      <span id='due-message'>{todo.isDue && 'Pass due date!!!'}</span>
+      <span id='due-message'>{todo.isDue && 'Due date expired!!!'}</span>
     </section>
   );
 }
