@@ -10,16 +10,6 @@ const initialState = [
   },
 ];
 
-const dateReducer = (state, action) => {
-  const { type } = action;
-
-  if (type === 'update current date') {
-    return getLocalDate(new Date());
-  }
-
-  return state;
-};
-
 const todoListReducer = (currentState, action) => {
   const { type, payload } = action;
 
@@ -47,4 +37,4 @@ const todoListReducer = (currentState, action) => {
   }
 };
 
-export { initialState, dateReducer, todoListReducer };
+export { initialState, todoListReducer };

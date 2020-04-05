@@ -1,21 +1,21 @@
 import React from 'react';
 import now from 'moment';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import { getLocalDate } from '../helpers/helpers';
 
-const areEqual = (prevProps, nextProps) => {
-  if (
-    prevProps.todo.id === nextProps.todo.id &&
-    prevProps.todo.completed === nextProps.todo.completed &&
-    nextProps.currentDate !== nextProps.todo.dueDate
-  ) {
-    return true;
-  }
-
-  return false;
-};
-
-const Todo = React.memo(({ todo, toggleTodo, currentDate }) => {
+const Todo = React.memo(({ todo, toggleTodo }) => {
   const completedDate = now().format('MMMM Do YYYY @ h:mm a');
+  const [isDue, setIsDue] = React.useState(false);
+
+  React.useEffect(() => {
+    let intervalId = setInterval(() => {
+      if (getLocalDate(new Date()) === todo.dueDate) {
+        setIsDue(true);
+      }
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [todo.dueDate]);
 
   return (
     <section onClick={() => toggleTodo(todo.id, completedDate)}>
@@ -29,12 +29,10 @@ const Todo = React.memo(({ todo, toggleTodo, currentDate }) => {
       )}
 
       <span id='due-message'>
-        {todo.dueDate === currentDate &&
-          !todo.completed &&
-          'Due date expired!!!'}
+        {isDue && !todo.completed && 'Due date expired!!!'}
       </span>
     </section>
   );
 });
 
-export default React.memo(Todo, areEqual);
+export default Todo;
