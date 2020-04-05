@@ -1,20 +1,27 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer, useState, useEffect } from 'react';
 import { v4 as id } from 'uuid';
 import DateTimePicker from 'react-datetime-picker';
 
-import { reducer, initialState } from '../reducers/reducer';
+import { reducer, initialState, getLocalTime } from '../reducers/reducer';
 import Todo from './Todo';
 
 export default function TodoList() {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  // const [input, setInput] = useState('');
+  const [currDate, setCurrDate] = useState(getLocalTime(new Date()));
   const [dueDate, setDueDate] = useState(new Date());
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setCurrDate(getLocalTime(new Date()));
+    }, 1000);
+
+    return () => clearInterval(id);
+  }, [currDate]);
 
   const addTodo = (e) => {
     e.preventDefault();
 
-    if (state.itemInput.length > 0) {
+    if (state.itemInput.length) {
       dispatch({
         type: 'addTodo',
         payload: { dueDate },
@@ -26,15 +33,12 @@ export default function TodoList() {
     }
   };
 
-  const toggleTodo = React.useCallback(
-    (id, time) => {
-      dispatch({
-        type: 'toggleCompleted',
-        payload: { id, time },
-      });
-    },
-    [dispatch]
-  );
+  const toggleTodo = (id, time) => {
+    dispatch({
+      type: 'toggleCompleted',
+      payload: { id, time },
+    });
+  };
 
   const clearCompleted = () => dispatch({ type: 'clearCompleted' });
 

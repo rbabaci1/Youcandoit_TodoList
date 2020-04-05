@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import now from 'moment';
 import { getLocalTime } from '../reducers/reducer';
 
