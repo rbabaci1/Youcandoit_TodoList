@@ -1,79 +1,50 @@
 import { v4 as id } from 'uuid';
+import { getLocalDate } from '../helpers/helpers';
 
-const initialState = {
-  itemInput: '',
-  todoList: [
-    {
-      item: 'Learn about reducers',
-      completed: false,
-      dueDate: 'none',
-      isDue: false,
-      id: id(),
-    },
-  ],
-};
-const getLocalDate = (date) => {
-  return [
-    date.toLocaleDateString(),
-    date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-  ].join(' ');
+const initialState = [
+  {
+    item: 'Learn about reducers',
+    completed: false,
+    dueDate: getLocalDate(new Date()),
+    id: id(),
+  },
+];
+
+const dateReducer = (state, action) => {
+  const { type } = action;
+
+  if (type === 'update current date') {
+    return getLocalDate(new Date());
+  }
+
+  return state;
 };
 
-const reducer = (currentState, action) => {
+const todoListReducer = (currentState, action) => {
   const { type, payload } = action;
 
   switch (type) {
     case 'addTodo': {
-      return {
-        todoList: [
-          ...currentState.todoList,
-          {
-            item: payload.userInput,
-            completed: false,
-            dueDate: getLocalDate(payload.dueDate),
-            isDue: false,
-            id: id(),
-          },
-        ],
-      };
+      return [...currentState, payload];
     }
     case 'mark todo completed': {
-      return {
-        ...currentState,
-        todoList: currentState.todoList.map((todo) => {
-          if (todo.id === payload.todoId) {
-            return {
-              ...todo,
-              completed: !todo.completed,
-              completedDate: !todo.completed
-                ? `on ${payload.completedDate}`
-                : '',
-            };
-          }
-          return todo;
-        }),
-      };
+      return currentState.map((todo) => {
+        if (todo.id !== payload.todoId) return todo;
+
+        return {
+          ...todo,
+          completed: !todo.completed,
+          completedDate: !todo.completed ? `on ${payload.completedDate}` : '',
+        };
+      });
     }
     case 'clear completed todos': {
-      return {
-        ...currentState,
-        todoList: currentState.todoList.filter((todo) => !todo.completed),
-      };
+      return currentState.filter((todo) => !todo.completed);
     }
-    case 'check due date': {
-      return {
-        ...currentState,
-        todoList: currentState.todoList.map((todo) => {
-          if (todo.dueDate === payload.currDate && todo.isDue === false) {
-            return { ...todo, isDue: true };
-          }
-          return todo;
-        }),
-      };
-    }
+
     default:
-      return { itemInput: '', todoList: currentState.todoList };
+      return currentState;
   }
 };
 
-export { reducer, initialState, getLocalDate };
+export { initialState, dateReducer, todoListReducer };

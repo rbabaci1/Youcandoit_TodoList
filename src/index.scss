@@ -16,7 +16,7 @@ code {
     monospace;
 }
 
-.todo-list {
+.App {
   h1 {
     text-align: center;
     font-family: 'Comic Neue';
@@ -105,67 +105,74 @@ code {
     }
   }
 
-  ol {
-    list-style: none;
-    counter-reset: item;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
+  .todo-list {
+    ol {
+      list-style: none;
+      counter-reset: item;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
 
-    section {
-      padding: 5px;
-      margin: 15px 10px 0 0;
-      height: fit-content;
-      background-color: rgba(199, 169, 69, 0.8);
-      border-top-right-radius: 20px;
-      border-bottom-right-radius: 20px;
+      section {
+        padding: 5px;
+        margin: 15px 10px 0 0;
+        height: fit-content;
+        background-color: rgba(199, 169, 69, 0.8);
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
 
-      &:hover {
-        transition: 0.5s;
-        background-color: rgba(155, 115, 30, 0.8);
-        cursor: pointer;
-      }
-
-      li {
-        cursor: pointer;
-        margin-right: 10px;
-        font-family: 'Comic Neue';
-        font-size: 28px;
-        counter-increment: item;
-
-        &:before {
-          margin-right: 5px;
-          content: counter(item);
-          background: rgb(70, 102, 83);
-          border-radius: 100%;
-          color: white;
-          width: 1.2em;
-          text-align: center;
-          display: inline-block;
-        }
-        @media (max-width: 615px) {
-          font-size: 22px;
-        }
-      }
-      span {
-        display: flex;
-        align-items: center;
-        font-size: 17px;
-        font-weight: bold;
-        padding: 3px;
-        text-decoration: underline;
-        svg {
-          color: rgb(18, 109, 56);
-          font-size: 30px;
-          margin-right: 3px;
+        &:hover {
+          transition: 0.5s;
+          background-color: rgba(155, 115, 30, 0.8);
+          cursor: pointer;
         }
 
-        @media (max-width: 615px) {
-          font-size: 15px;
+        li {
+          cursor: pointer;
+          margin-right: 10px;
+          font-family: 'Comic Neue';
+          font-size: 28px;
+          counter-increment: item;
+
+          &:before {
+            margin-right: 5px;
+            content: counter(item);
+            background: rgb(70, 102, 83);
+            border-radius: 100%;
+            color: white;
+            width: 1.2em;
+            text-align: center;
+            display: inline-block;
+          }
+          @media (max-width: 615px) {
+            font-size: 22px;
+          }
         }
-      }
-      #due-message {
-        color: rgb(241, 42, 15);
+        span {
+          display: flex;
+          align-items: center;
+          font-size: 17px;
+          font-weight: bold;
+          padding: 3px;
+          text-decoration: underline;
+          svg {
+            color: rgb(18, 109, 56);
+            font-size: 30px;
+            margin-right: 3px;
+          }
+
+          @media (max-width: 615px) {
+            font-size: 15px;
+          }
+        }
+        #due-message {
+          letter-spacing: 1px;
+          -webkit-animation: color-change 1s infinite;
+          -moz-animation: color-change 1s infinite;
+          -o-animation: color-change 1s infinite;
+          -ms-animation: color-change 1s infinite;
+          animation: color-change 1s infinite;
+        }
       }
     }
   }
@@ -187,13 +194,71 @@ code {
       padding: 3px 8px;
     }
   }
+
   .clear-btn {
     background-color: rgb(236, 213, 150);
     margin: 10px 0;
     padding: 5px 10px;
   }
 }
+
 .completed {
   text-decoration: line-through;
   color: rgb(77, 75, 75);
+}
+
+@-webkit-keyframes color-change {
+  0% {
+    color: red;
+  }
+  50% {
+    color: blue;
+  }
+  100% {
+    color: red;
+  }
+}
+@-moz-keyframes color-change {
+  0% {
+    color: red;
+  }
+  50% {
+    color: blue;
+  }
+  100% {
+    color: red;
+  }
+}
+@-ms-keyframes color-change {
+  0% {
+    color: red;
+  }
+  50% {
+    color: blue;
+  }
+  100% {
+    color: red;
+  }
+}
+@-o-keyframes color-change {
+  0% {
+    color: red;
+  }
+  50% {
+    color: blue;
+  }
+  100% {
+    color: red;
+  }
+}
+@keyframes color-change {
+  0% {
+    color: red;
+  }
+  50% {
+    color: blue;
+  }
+  100% {
+    color: red;
+  }
 }
