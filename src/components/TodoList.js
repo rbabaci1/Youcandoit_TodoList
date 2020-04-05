@@ -6,20 +6,23 @@ import { reducer, initialState } from '../reducers/reducer';
 import Todo from './Todo';
 
 export default function TodoList() {
-  const [todoList, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  const [input, setInput] = useState('');
+  // const [input, setInput] = useState('');
   const [dueDate, setDueDate] = useState(new Date());
 
   const addTodo = (e) => {
     e.preventDefault();
 
-    if (input.length > 0) {
+    if (state.itemInput.length > 0) {
       dispatch({
         type: 'addTodo',
-        payload: { input, dueDate },
+        payload: { dueDate },
       });
-      setInput('');
+      dispatch({
+        type: 'todo input',
+        payload: { input: '' },
+      });
     }
   };
 
@@ -45,8 +48,13 @@ export default function TodoList() {
           Enter a Todo:
           <input
             type='text'
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
+            value={state.itemInput}
+            onChange={(e) =>
+              dispatch({
+                type: 'todo input',
+                payload: { input: e.target.value },
+              })
+            }
           />
         </label>
 
@@ -58,7 +66,7 @@ export default function TodoList() {
       </form>
 
       <ol>
-        {todoList.map((todo) => (
+        {state.todoList.map((todo) => (
           <Todo key={id()} todo={todo} toggleTodo={toggleTodo} />
         ))}
       </ol>
