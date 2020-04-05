@@ -1,14 +1,13 @@
 import React, { useReducer, useState, useEffect } from 'react';
 import { v4 as id } from 'uuid';
-import DateTimePicker from 'react-datetime-picker';
 
 import { reducer, initialState, getLocalDate } from '../reducers/reducer';
 import Todo from './Todo';
+import TodoForm from './TodoForm';
 
 export default function TodoList() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [currDate, setCurrDate] = useState(getLocalDate(new Date()));
-  const [dueDate, setDueDate] = useState(new Date());
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -23,19 +22,11 @@ export default function TodoList() {
     return () => clearInterval(id);
   }, [currDate]);
 
-  const addTodo = (e) => {
-    e.preventDefault();
-
-    if (state.itemInput.length) {
-      dispatch({
-        type: 'addTodo',
-        payload: { dueDate },
-      });
-      dispatch({
-        type: 'update user input',
-        payload: { input: '' },
-      });
-    }
+  const addTodo = (userInput, dueDate) => {
+    dispatch({
+      type: 'addTodo',
+      payload: { userInput, dueDate },
+    });
   };
 
   const toggleTodo = (todoId, completedDate) => {
@@ -52,27 +43,7 @@ export default function TodoList() {
       <h1>todo list</h1>
       {console.log('render in TodoList')}
 
-      <form onSubmit={addTodo}>
-        <label>
-          Enter a Todo:
-          <input
-            type='text'
-            value={state.itemInput}
-            onChange={(e) =>
-              dispatch({
-                type: 'todo input',
-                payload: { input: e.target.value },
-              })
-            }
-          />
-        </label>
-
-        <button>Add</button>
-        <div className='date-time'>
-          Add a due date:
-          <DateTimePicker onChange={(e) => setDueDate(e)} value={dueDate} />
-        </div>
-      </form>
+      <TodoForm addTodo={addTodo} />
 
       <ol>
         {state.todoList.map((todo) => (

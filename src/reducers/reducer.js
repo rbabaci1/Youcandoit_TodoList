@@ -23,18 +23,12 @@ const reducer = (currentState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case 'update user input': {
-      return {
-        ...currentState,
-        itemInput: payload.input,
-      };
-    }
     case 'addTodo': {
       return {
         todoList: [
           ...currentState.todoList,
           {
-            item: currentState.itemInput,
+            item: payload.userInput,
             completed: false,
             dueDate: getLocalDate(payload.dueDate),
             isDue: false,
