@@ -64,6 +64,17 @@ const reducer = (currentState, action) => {
         todoList: currentState.todoList.filter((todo) => !todo.completed),
       };
     }
+    case 'is due': {
+      return {
+        ...currentState,
+        todoList: currentState.todoList.map((todo) => {
+          if (todo.dueDate === payload.currDate && todo.isDue === false) {
+            return { ...todo, isDue: true };
+          }
+          return todo;
+        }),
+      };
+    }
     default:
       return { itemInput: '', todoList: currentState.todoList };
   }

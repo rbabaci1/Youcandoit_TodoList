@@ -1,6 +1,5 @@
 import React from 'react';
 import now from 'moment';
-import { getLocalTime } from '../reducers/reducer';
 
 export default function Todo({ todo, toggleTodo }) {
   return (
@@ -12,11 +11,7 @@ export default function Todo({ todo, toggleTodo }) {
 
       <span>{todo.time}</span>
 
-      {/* <span id='due-message'>
-          {todo.dueDate === this.state.currentDate &&
-            !todo.completed &&
-            'Pass due date!!!'}
-        </span> */}
+      <span id='due-message'>{todo.isDue && 'Pass due date!!!'}</span>
     </section>
   );
 }

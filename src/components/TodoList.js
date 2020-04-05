@@ -15,6 +15,11 @@ export default function TodoList() {
       setCurrDate(getLocalTime(new Date()));
     }, 1000);
 
+    dispatch({
+      type: 'is due',
+      payload: { currDate },
+    });
+
     return () => clearInterval(id);
   }, [currDate]);
 
