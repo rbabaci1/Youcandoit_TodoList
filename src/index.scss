@@ -147,12 +147,17 @@ code {
         }
       }
       span {
-        display: inline-block;
+        display: flex;
+        align-items: center;
         font-size: 17px;
         font-weight: bold;
-        margin-left: 5px;
         padding: 3px;
         text-decoration: underline;
+        svg {
+          color: rgb(18, 109, 56);
+          font-size: 30px;
+          margin-right: 3px;
+        }
 
         @media (max-width: 615px) {
           font-size: 15px;
