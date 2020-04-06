@@ -15,8 +15,11 @@ const checkIfThereIsACompletedTodo = (todoList) => {
 const getStorageData = (key) => JSON.parse(localStorage.getItem(key));
 
 const setInitialStorage = (key, initialValue) => {
-  localStorage.setItem(key, JSON.stringify(initialValue));
+  const todoList = getStorageData(key);
 
+  if (todoList) return todoList;
+
+  localStorage.setItem(key, JSON.stringify(initialValue));
   return initialValue;
 };
 
@@ -25,8 +28,38 @@ const updateLocalStorage = (key, newTodo) => {
   todoList.push(newTodo);
 
   localStorage.setItem(key, JSON.stringify(todoList));
+};
 
-  return todoList;
+const toggleLocalStorageItem = (key, itemId, completedDate) => {
+  const todoList = getStorageData(key);
+
+  todoList.forEach((todo) => {
+    if (todo.id === itemId) {
+      todo.completed = !todo.completed;
+      todo.completedDate = todo.completed ? `on ${completedDate}` : '';
+    }
+  });
+
+  localStorage.setItem(key, JSON.stringify(todoList));
+};
+
+const clearCompletedStorageItems = (key) => {
+  const todoList = getStorageData(key);
+  const notCompletedList = todoList.filter((todo) => !todo.completed);
+
+  localStorage.setItem(key, JSON.stringify(notCompletedList));
+};
+
+const toggleIsDueStorageItems = (key, itemId) => {
+  const todoList = getStorageData(key);
+
+  todoList.forEach((todo) => {
+    if (todo.id === itemId) {
+      todo.isDue = true;
+    }
+  });
+
+  localStorage.setItem(key, JSON.stringify(todoList));
 };
 
 export {
@@ -34,4 +67,8 @@ export {
   checkIfThereIsACompletedTodo,
   setInitialStorage,
   updateLocalStorage,
+  getStorageData,
+  toggleLocalStorageItem,
+  clearCompletedStorageItems,
+  toggleIsDueStorageItems,
 };
