@@ -1,21 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import now from 'moment';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { getLocalDate } from '../helpers/helpers';
 
-const Todo = React.memo(({ todo, toggleTodo }) => {
+const Todo = React.memo(({ todo, toggleTodo, toggleIsDue }) => {
   const completedDate = now().format('MMMM Do YYYY @ h:mm a');
-  const [isDue, setIsDue] = React.useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     let intervalId = setInterval(() => {
       if (getLocalDate(new Date()) === todo.dueDate) {
-        setIsDue(true);
+        toggleIsDue(todo.id);
+        clearInterval(intervalId);
       }
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [todo.dueDate]);
+  }, [todo.id, todo.dueDate, toggleTodo, toggleIsDue]);
 
   return (
     <section onClick={() => toggleTodo(todo.id, completedDate)}>
@@ -29,7 +29,7 @@ const Todo = React.memo(({ todo, toggleTodo }) => {
       )}
 
       <span id='due-message'>
-        {isDue && !todo.completed && 'Due date expired!!!'}
+        {todo.isDue && !todo.completed && 'Due date expired!!!'}
       </span>
     </section>
   );

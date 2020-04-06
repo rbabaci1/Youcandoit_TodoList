@@ -17,6 +17,7 @@ function App() {
           item,
           completed: false,
           dueDate,
+          isDue: false,
           id: id(),
         },
       });
@@ -34,6 +35,16 @@ function App() {
     [dispatch]
   );
 
+  const toggleIsDue = useCallback(
+    (todoId) => {
+      dispatch({
+        type: 'toggle is due',
+        payload: { todoId },
+      });
+    },
+    [dispatch]
+  );
+
   const clearCompleted = () => dispatch({ type: 'clear completed todos' });
 
   return (
@@ -42,7 +53,11 @@ function App() {
 
       <TodoForm addTodo={addTodo} />
 
-      <TodoList todoList={todoList} toggleTodo={toggleTodo} />
+      <TodoList
+        todoList={todoList}
+        toggleTodo={toggleTodo}
+        toggleIsDue={toggleIsDue}
+      />
 
       <button
         className='clear-btn'

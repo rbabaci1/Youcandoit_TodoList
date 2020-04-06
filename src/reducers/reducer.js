@@ -6,6 +6,7 @@ const initialState = [
     item: 'Learn about reducers',
     completed: false,
     dueDate: getLocalDate(new Date()),
+    isDue: true,
     id: id(),
   },
 ];
@@ -30,6 +31,16 @@ const todoListReducer = (currentState, action) => {
     }
     case 'clear completed todos': {
       return currentState.filter((todo) => !todo.completed);
+    }
+    case 'toggle is due': {
+      return currentState.map((todo) => {
+        if (todo.id !== payload.todoId) return todo;
+
+        return {
+          ...todo,
+          isDue: true,
+        };
+      });
     }
 
     default:
