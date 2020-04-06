@@ -14,12 +14,11 @@ const Todo = React.memo(({ todo, toggleTodo, toggleIsDue }) => {
       ) {
         toggleIsDue(todo.id);
         clearInterval(intervalId);
-        return;
       }
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [todo.id, todo.dueDate, toggleTodo, toggleIsDue]);
+  }, []);
 
   return (
     <section onClick={() => toggleTodo(todo.id, completedDate)}>
