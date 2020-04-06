@@ -12,4 +12,26 @@ const checkIfThereIsACompletedTodo = (todoList) => {
   return false;
 };
 
-export { getLocalDate, checkIfThereIsACompletedTodo };
+const getStorageData = (key) => JSON.parse(localStorage.getItem(key));
+
+const setInitialStorage = (key, initialValue) => {
+  localStorage.setItem(key, JSON.stringify(initialValue));
+
+  return initialValue;
+};
+
+const updateLocalStorage = (key, newTodo) => {
+  const todoList = getStorageData(key);
+  todoList.push(newTodo);
+
+  localStorage.setItem(key, JSON.stringify(todoList));
+
+  return todoList;
+};
+
+export {
+  getLocalDate,
+  checkIfThereIsACompletedTodo,
+  setInitialStorage,
+  updateLocalStorage,
+};

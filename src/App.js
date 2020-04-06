@@ -7,7 +7,7 @@ import TodoList from './components/TodoList';
 import TodoForm from './components/TodoForm';
 
 function App() {
-  const [todoList, dispatch] = useReducer(todoListReducer, initialState);
+  const [state, dispatch] = useReducer(todoListReducer, initialState);
 
   const addTodo = useCallback(
     (item, dueDate) => {
@@ -54,7 +54,7 @@ function App() {
       <TodoForm addTodo={addTodo} />
 
       <TodoList
-        todoList={todoList}
+        todoList={state.todoList}
         toggleTodo={toggleTodo}
         toggleIsDue={toggleIsDue}
       />
@@ -62,7 +62,7 @@ function App() {
       <button
         className='clear-btn'
         onClick={clearCompleted}
-        disabled={!checkIfThereIsACompletedTodo(todoList)}
+        disabled={!checkIfThereIsACompletedTodo(state.todoList)}
       >
         Clear Completed
       </button>
