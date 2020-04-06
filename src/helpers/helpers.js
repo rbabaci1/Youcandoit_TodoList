@@ -15,19 +15,19 @@ const checkIfThereIsACompletedTodo = (todoList) => {
 const getStorageData = (key) => JSON.parse(localStorage.getItem(key));
 
 const setInitialStorage = (key, initialValue) => {
-  const todoList = getStorageData(key);
+  const data = getStorageData(key);
 
-  if (todoList) return todoList;
+  if (data) return data;
 
   localStorage.setItem(key, JSON.stringify(initialValue));
   return initialValue;
 };
 
-const updateLocalStorage = (key, newTodo) => {
-  const todoList = getStorageData(key);
-  todoList.push(newTodo);
+const updateLocalStorage = (key, newItem) => {
+  const data = getStorageData(key);
+  data.push(newItem);
 
-  localStorage.setItem(key, JSON.stringify(todoList));
+  localStorage.setItem(key, JSON.stringify(data));
 };
 
 const toggleLocalStorageItem = (key, itemId, completedDate) => {

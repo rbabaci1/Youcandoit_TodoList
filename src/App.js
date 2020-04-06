@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useReducer } from 'react';
 import { v4 as id } from 'uuid';
 
 import { todoListReducer, initialState } from './reducers/reducer';
@@ -15,47 +15,37 @@ import TodoForm from './components/TodoForm';
 function App() {
   const [state, dispatch] = useReducer(todoListReducer, initialState);
 
-  const addTodo = useCallback(
-    (item, dueDate) => {
-      updateLocalStorage('todoList', {
-        item,
-        completed: false,
-        dueDate,
-        isDue: false,
-        id: id(),
-      });
+  const addTodo = (item, dueDate) => {
+    updateLocalStorage('todoList', {
+      item,
+      completed: false,
+      dueDate,
+      isDue: false,
+      id: id(),
+    });
 
-      dispatch({
-        type: 'addTodo',
-      });
-    },
-    [dispatch]
-  );
+    dispatch({
+      type: 'addTodo',
+    });
+  };
 
-  const toggleTodo = useCallback(
-    (todoId, completedDate) => {
-      toggleLocalStorageItem('todoList', todoId, completedDate);
+  const toggleTodo = (todoId, completedDate) => {
+    toggleLocalStorageItem('todoList', todoId, completedDate);
 
-      dispatch({
-        type: 'mark todo completed',
-      });
-    },
-    [dispatch]
-  );
+    dispatch({
+      type: 'mark todo completed',
+    });
+  };
 
-  const toggleIsDue = useCallback(
-    (todoId) => {
-      toggleIsDueStorageItems('todoList', todoId);
-      dispatch({
-        type: 'toggle is due',
-      });
-    },
-    [dispatch]
-  );
+  const toggleIsDue = (todoId) => {
+    toggleIsDueStorageItems('todoList', todoId);
+    dispatch({
+      type: 'toggle is due',
+    });
+  };
 
   const clearCompleted = () => {
     clearCompletedStorageItems('todoList');
-
     dispatch({ type: 'clear completed items' });
   };
 

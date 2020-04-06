@@ -8,7 +8,10 @@ const Todo = React.memo(({ todo, toggleTodo, toggleIsDue }) => {
 
   useEffect(() => {
     let intervalId = setInterval(() => {
-      if (getLocalDate(new Date()) === todo.dueDate) {
+      if (
+        getLocalDate(new Date()) === todo.dueDate ||
+        getLocalDate(new Date()) > todo.dueDate
+      ) {
         toggleIsDue(todo.id);
         clearInterval(intervalId);
       }
