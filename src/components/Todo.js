@@ -14,6 +14,7 @@ const Todo = React.memo(({ todo, toggleTodo, toggleIsDue }) => {
       ) {
         toggleIsDue(todo.id);
         clearInterval(intervalId);
+        return;
       }
     }, 1000);
 
