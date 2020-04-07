@@ -56,6 +56,8 @@ const toggleIsDueStorageItems = (key, itemId) => {
   todoList.forEach((todo) => {
     if (todo.id === itemId) {
       todo.isDue = true;
+
+      return;
     }
   });
 

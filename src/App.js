@@ -1,5 +1,6 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useCallback } from 'react';
 import { v4 as id } from 'uuid';
+import { toast } from 'react-toastify';
 
 import { todoListReducer, initialState } from './reducers/reducer';
 import {
@@ -12,37 +13,59 @@ import {
 import TodoList from './components/TodoList';
 import TodoForm from './components/TodoForm';
 
+const notifyAdd = () => {
+  toast.info('Item added!', {
+    position: toast.POSITION.BOTTOM_CENTER,
+  });
+};
+const notifyClear = () => {
+  toast.success(`Item-s cleared!`, {
+    position: toast.POSITION.BOTTOM_CENTER,
+  });
+};
+
 function App() {
   const [state, dispatch] = useReducer(todoListReducer, initialState);
 
-  const addTodo = (item, dueDate) => {
-    updateLocalStorage('todoList', {
-      item,
-      completed: false,
-      dueDate,
-      isDue: false,
-      id: id(),
-    });
+  const addTodo = useCallback(
+    (item, dueDate) => {
+      updateLocalStorage('todoList', {
+        item,
+        completed: false,
+        dueDate,
+        isDue: false,
+        alerted: false,
+        id: id(),
+      });
+      dispatch({
+        type: 'addTodo',
+      });
 
-    dispatch({
-      type: 'addTodo',
-    });
-  };
+      notifyAdd();
+    },
+    [dispatch]
+  );
 
-  const toggleTodo = (todoId, completedDate) => {
-    toggleLocalStorageItem('todoList', todoId, completedDate);
+  const toggleTodo = useCallback(
+    (todoId, completedDate) => {
+      toggleLocalStorageItem('todoList', todoId, completedDate);
 
-    dispatch({
-      type: 'mark todo completed',
-    });
-  };
+      dispatch({
+        type: 'mark todo completed',
+      });
+    },
+    [dispatch]
+  );
 
-  const toggleIsDue = (todoId) => {
-    toggleIsDueStorageItems('todoList', todoId);
-    dispatch({
-      type: 'toggle is due',
-    });
-  };
+  const toggleIsDue = useCallback(
+    (todoId) => {
+      toggleIsDueStorageItems('todoList', todoId);
+      dispatch({
+        type: 'toggle is due',
+      });
+    },
+    [dispatch]
+  );
 
   const clearCompleted = () => {
     clearCompletedStorageItems('todoList');
@@ -63,7 +86,10 @@ function App() {
 
       <button
         className='clear-btn'
-        onClick={clearCompleted}
+        onClick={() => {
+          clearCompleted();
+          notifyClear();
+        }}
         disabled={!checkIfThereIsACompletedTodo(state.todoList)}
       >
         Clear Completed

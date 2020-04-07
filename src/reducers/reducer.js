@@ -11,6 +11,7 @@ const initialList = [
     completed: false,
     dueDate: getLocalDate(new Date()),
     isDue: true,
+    alerted: false,
     id: id(),
   },
 ];
