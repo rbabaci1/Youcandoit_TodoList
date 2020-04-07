@@ -30,13 +30,14 @@ const updateLocalStorage = (key, newItem) => {
   localStorage.setItem(key, JSON.stringify(data));
 };
 
-const toggleLocalStorageItem = (key, itemId, completedDate) => {
+const toggleLocalStorageItem = (key, todoId, completedDate) => {
   const todoList = getStorageData(key);
 
   todoList.forEach((todo) => {
-    if (todo.id === itemId) {
+    if (todo.id === todoId) {
       todo.completed = !todo.completed;
-      todo.completedDate = todo.completed ? `on ${completedDate}` : '';
+      todo.completedDate = completedDate;
+      return;
     }
   });
 
@@ -56,7 +57,6 @@ const toggleIsDueStorageItems = (key, itemId) => {
   todoList.forEach((todo) => {
     if (todo.id === itemId) {
       todo.isDue = true;
-
       return;
     }
   });

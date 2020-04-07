@@ -1,6 +1,5 @@
 import React, { useReducer, useCallback } from 'react';
 import { v4 as id } from 'uuid';
-import { toast } from 'react-toastify';
 
 import { todoListReducer, initialState } from './reducers/reducer';
 import {
@@ -13,17 +12,6 @@ import {
 import TodoList from './components/TodoList';
 import TodoForm from './components/TodoForm';
 
-const notifyAdd = () => {
-  toast.info('Item added!', {
-    position: toast.POSITION.BOTTOM_CENTER,
-  });
-};
-const notifyClear = () => {
-  toast.success(`Item-s cleared!`, {
-    position: toast.POSITION.BOTTOM_CENTER,
-  });
-};
-
 function App() {
   const [state, dispatch] = useReducer(todoListReducer, initialState);
 
@@ -34,14 +22,12 @@ function App() {
         completed: false,
         dueDate,
         isDue: false,
-        alerted: false,
         id: id(),
       });
+
       dispatch({
         type: 'addTodo',
       });
-
-      notifyAdd();
     },
     [dispatch]
   );
@@ -52,6 +38,7 @@ function App() {
 
       dispatch({
         type: 'mark todo completed',
+        payload: { todoId, completedDate },
       });
     },
     [dispatch]
@@ -60,6 +47,7 @@ function App() {
   const toggleIsDue = useCallback(
     (todoId) => {
       toggleIsDueStorageItems('todoList', todoId);
+
       dispatch({
         type: 'toggle is due',
       });
@@ -86,10 +74,7 @@ function App() {
 
       <button
         className='clear-btn'
-        onClick={() => {
-          clearCompleted();
-          notifyClear();
-        }}
+        onClick={clearCompleted}
         disabled={!checkIfThereIsACompletedTodo(state.todoList)}
       >
         Clear Completed

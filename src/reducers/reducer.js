@@ -11,7 +11,6 @@ const initialList = [
     completed: false,
     dueDate: getLocalDate(new Date()),
     isDue: true,
-    alerted: false,
     id: id(),
   },
 ];
@@ -21,17 +20,31 @@ const initialState = {
 };
 
 const todoListReducer = (currentState, action) => {
-  switch (action.type) {
+  const { todoList } = currentState;
+  const { type, payload } = action;
+
+  switch (type) {
     case 'addTodo': {
       return { todoList: getStorageData('todoList') };
     }
     case 'mark todo completed': {
+      return {
+        todoList: todoList.map((todo) => {
+          if (todo.id === payload.todoId) {
+            return {
+              ...todo,
+              completed: !todo.completed,
+              completedDate: payload.completedDate,
+            };
+          }
+          return todo;
+        }),
+      };
+    }
+    case 'toggle is due': {
       return { todoList: getStorageData('todoList') };
     }
     case 'clear completed items': {
-      return { todoList: getStorageData('todoList') };
-    }
-    case 'toggle is due': {
       return { todoList: getStorageData('todoList') };
     }
     default:

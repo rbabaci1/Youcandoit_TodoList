@@ -164,7 +164,7 @@ code {
           padding: 3px;
           text-decoration: underline;
           svg {
-            color: rgb(18, 109, 56);
+            color: rgb(31, 114, 11);
             font-size: 30px;
             margin-right: 3px;
           }
@@ -269,4 +269,9 @@ code {
   100% {
     color: red;
   }
+}
+
+.todo {
+  color: rgb(54, 53, 65);
+  font-weight: bold;
 }

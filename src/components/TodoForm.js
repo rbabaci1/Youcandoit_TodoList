@@ -2,6 +2,19 @@ import React, { useState, useEffect } from 'react';
 import DateTimePicker from 'react-datetime-picker';
 import { getLocalDate, setInitialStorage } from '../helpers/helpers';
 
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const notifyAdded = () => {
+  toast.info('Item added!', {
+    containerId: 'B',
+    position: toast.POSITION.BOTTOM_CENTER,
+    autoClose: 1500,
+    draggable: true,
+    className: 'todo',
+  });
+};
+
 const TodoForm = React.memo(({ addTodo }) => {
   const [userInput, setUserInput] = useState(
     setInitialStorage('userInput', '')
@@ -16,6 +29,7 @@ const TodoForm = React.memo(({ addTodo }) => {
     e.preventDefault();
 
     addTodo(userInput, getLocalDate(dueDate));
+    notifyAdded();
     setUserInput('');
     setDueDate(new Date());
   };
@@ -36,6 +50,8 @@ const TodoForm = React.memo(({ addTodo }) => {
         Add a due date:
         <DateTimePicker onChange={(e) => setDueDate(e)} value={dueDate} />
       </div>
+
+      <ToastContainer enableMultiContainer containerId={'B'} />
     </form>
   );
 });
