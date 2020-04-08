@@ -34,8 +34,8 @@ const Todo = React.memo(({ todo, toggleTodo, toggleIsDue }) => {
         getLocalDate(new Date()) > todo.dueDate
       ) {
         toggleIsDue(todo.id);
-        clearInterval(intervalId);
         notifyDueDate(todo.item);
+        clearInterval(intervalId);
         return;
       }
     }, 1000);
