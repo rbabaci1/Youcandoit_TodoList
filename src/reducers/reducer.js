@@ -22,14 +22,12 @@ const initialState = {
   todoList: setInitialStorage('todoList', initialList),
 };
 
-const todoListReducer = (currentState, action) => {
-  const { type, payload } = action;
-
+const todoListReducer = (currentState, { type, payload }) => {
   switch (type) {
-    case 'addTodo': {
+    case 'ADD_TODO': {
       return { todoList: updateLocalStorage('todoList', payload) };
     }
-    case 'mark todo completed': {
+    case 'TOGGLE_COMPLETED': {
       return {
         todoList: toggleLocalStorageItem(
           'todoList',
@@ -38,10 +36,10 @@ const todoListReducer = (currentState, action) => {
         ),
       };
     }
-    case 'toggle is due': {
-      return { todoList: toggleIsDueStorageItems('todoList', payload.todoId) };
+    case 'SET_IS_DUE_TRUE': {
+      return { todoList: toggleIsDueStorageItems('todoList', payload) };
     }
-    case 'clear completed items': {
+    case 'CLEAR_COMPLETED_ITEMS': {
       return { todoList: clearCompletedStorageItems('todoList') };
     }
     default:

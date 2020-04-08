@@ -6,13 +6,19 @@ import { checkIfThereIsACompletedTodo } from './helpers/helpers';
 import TodoList from './components/TodoList';
 import TodoForm from './components/TodoForm';
 
+// actions names
+const ADD_TODO = 'ADD_TODO';
+const TOGGLE_COMPLETED = 'TOGGLE_COMPLETED';
+const SET_IS_DUE_TRUE = 'SET_IS_DUE_TRUE';
+const CLEAR_COMPLETED_ITEMS = 'CLEAR_COMPLETED_ITEMS';
+
 function App() {
   const [state, dispatch] = useReducer(todoListReducer, initialState);
 
   const addTodo = useCallback(
     (item, dueDate) => {
       dispatch({
-        type: 'addTodo',
+        type: ADD_TODO,
         payload: {
           item,
           completed: false,
@@ -28,7 +34,7 @@ function App() {
   const toggleTodo = useCallback(
     (todoId, completedDate) => {
       dispatch({
-        type: 'mark todo completed',
+        type: TOGGLE_COMPLETED,
         payload: { todoId, completedDate },
       });
     },
@@ -38,15 +44,15 @@ function App() {
   const toggleIsDue = useCallback(
     (todoId) => {
       dispatch({
-        type: 'toggle is due',
-        payload: { todoId },
+        type: SET_IS_DUE_TRUE,
+        payload: todoId,
       });
     },
     [dispatch]
   );
 
   const clearCompleted = () => {
-    dispatch({ type: 'clear completed items' });
+    dispatch({ type: CLEAR_COMPLETED_ITEMS });
   };
 
   return (
