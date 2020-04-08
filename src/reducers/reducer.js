@@ -2,7 +2,10 @@ import { v4 as id } from 'uuid';
 import {
   getLocalDate,
   setInitialStorage,
-  getStorageData,
+  updateLocalStorage,
+  toggleLocalStorageItem,
+  toggleIsDueStorageItems,
+  clearCompletedStorageItems,
 } from '../helpers/helpers';
 
 const initialList = [
@@ -20,32 +23,26 @@ const initialState = {
 };
 
 const todoListReducer = (currentState, action) => {
-  const { todoList } = currentState;
   const { type, payload } = action;
 
   switch (type) {
     case 'addTodo': {
-      return { todoList: getStorageData('todoList') };
+      return { todoList: updateLocalStorage('todoList', payload) };
     }
     case 'mark todo completed': {
       return {
-        todoList: todoList.map((todo) => {
-          if (todo.id === payload.todoId) {
-            return {
-              ...todo,
-              completed: !todo.completed,
-              completedDate: payload.completedDate,
-            };
-          }
-          return todo;
-        }),
+        todoList: toggleLocalStorageItem(
+          'todoList',
+          payload.todoId,
+          payload.completedDate
+        ),
       };
     }
     case 'toggle is due': {
-      return { todoList: getStorageData('todoList') };
+      return { todoList: toggleIsDueStorageItems('todoList', payload.todoId) };
     }
     case 'clear completed items': {
-      return { todoList: getStorageData('todoList') };
+      return { todoList: clearCompletedStorageItems('todoList') };
     }
     default:
       return currentState;

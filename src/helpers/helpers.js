@@ -26,8 +26,9 @@ const setInitialStorage = (key, initialValue) => {
 const updateLocalStorage = (key, newItem) => {
   const data = getStorageData(key);
   data.push(newItem);
-
   localStorage.setItem(key, JSON.stringify(data));
+
+  return data;
 };
 
 const toggleLocalStorageItem = (key, todoId, completedDate) => {
@@ -40,15 +41,9 @@ const toggleLocalStorageItem = (key, todoId, completedDate) => {
       return;
     }
   });
-
   localStorage.setItem(key, JSON.stringify(todoList));
-};
 
-const clearCompletedStorageItems = (key) => {
-  const todoList = getStorageData(key);
-  const notCompletedList = todoList.filter((todo) => !todo.completed);
-
-  localStorage.setItem(key, JSON.stringify(notCompletedList));
+  return todoList;
 };
 
 const toggleIsDueStorageItems = (key, itemId) => {
@@ -60,8 +55,18 @@ const toggleIsDueStorageItems = (key, itemId) => {
       return;
     }
   });
-
   localStorage.setItem(key, JSON.stringify(todoList));
+
+  return todoList;
+};
+
+const clearCompletedStorageItems = (key) => {
+  const todoList = getStorageData(key);
+  const notCompletedList = todoList.filter((todo) => !todo.completed);
+
+  localStorage.setItem(key, JSON.stringify(notCompletedList));
+
+  return notCompletedList;
 };
 
 export {

@@ -6,7 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const notifyAdded = () => {
-  toast.info('Item added!', {
+  toast.info('Todo added!', {
     containerId: 'B',
     position: toast.POSITION.BOTTOM_CENTER,
     autoClose: 1500,

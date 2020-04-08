@@ -6,10 +6,19 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { getLocalDate } from '../helpers/helpers';
 
 const notifyCompleted = () => {
-  toast.success('Item completed!', {
+  toast.success('Todo completed!', {
     containerId: 'A',
     position: toast.POSITION.BOTTOM_CENTER,
-    autoClose: 2000,
+    autoClose: 1500,
+    draggable: true,
+    className: 'todo',
+  });
+};
+
+const notifyDueDate = (todo) => {
+  toast.warn(`Salut!!! it's time to ${todo}`, {
+    containerId: 'C',
+    autoClose: 7000,
     draggable: true,
     className: 'todo',
   });
@@ -18,14 +27,6 @@ const notifyCompleted = () => {
 const Todo = React.memo(({ todo, toggleTodo, toggleIsDue }) => {
   const completedDate = now().format('MMMM Do YYYY @ h:mm a');
 
-  const notifyDueDate = () =>
-    toast.warn(`Salut!!! it's time to ${todo.item}`, {
-      containerId: 'C',
-      autoClose: 7000,
-      draggable: true,
-      className: 'todo',
-    });
-
   useEffect(() => {
     let intervalId = setInterval(() => {
       if (
@@ -33,24 +34,25 @@ const Todo = React.memo(({ todo, toggleTodo, toggleIsDue }) => {
         getLocalDate(new Date()) > todo.dueDate
       ) {
         toggleIsDue(todo.id);
-        notifyDueDate();
         clearInterval(intervalId);
+        notifyDueDate(todo.item);
         return;
       }
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [todo.id, todo.item, todo.dueDate, toggleIsDue]);
 
   const handleClick = () => {
     toggleTodo(todo.id, completedDate);
-    if (!todo.completed) notifyCompleted();
+    !todo.completed && notifyCompleted();
   };
 
   return (
     <>
       <section onClick={handleClick}>
         <li className={todo.completed ? 'completed' : ''}>{todo.item}</li>
+
         {todo.completed && (
           <span>
             <CheckCircleIcon />
@@ -66,7 +68,7 @@ const Todo = React.memo(({ todo, toggleTodo, toggleIsDue }) => {
       <ToastContainer enableMultiContainer containerId={'A'} />
 
       {!todo.completed && (
-        <ToastContainer enableMultiContainer containerId={'C'} />
+        <ToastContainer enableMultiContainer containerId={'C'} test='rabah' />
       )}
     </>
   );
