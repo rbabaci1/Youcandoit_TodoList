@@ -3,8 +3,9 @@ import now from 'moment';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import { getLocalDate } from '../helpers/helpers';
+import { formatDate } from '../helpers';
 
+// Notify the user that a todo is completed
 const notifyCompleted = () => {
   toast.success('Todo completed!', {
     containerId: 'A',
@@ -14,7 +15,7 @@ const notifyCompleted = () => {
     className: 'todo',
   });
 };
-
+// Notify the user that a todo is expired
 const notifyDueDate = (todo) => {
   toast.warn(`Salut!!! it's time to ${todo}`, {
     containerId: 'C',
@@ -30,8 +31,8 @@ const Todo = React.memo(({ todo, toggleTodo, toggleIsDue }) => {
   useEffect(() => {
     let intervalId = setInterval(() => {
       if (
-        getLocalDate(new Date()) === todo.dueDate ||
-        getLocalDate(new Date()) > todo.dueDate
+        formatDate(new Date()) === todo.dueDate ||
+        formatDate(new Date()) > todo.dueDate
       ) {
         toggleIsDue(todo.id);
         notifyDueDate(todo.item);

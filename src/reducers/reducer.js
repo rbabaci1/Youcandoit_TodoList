@@ -1,33 +1,21 @@
-import { v4 as id } from 'uuid';
 import {
-  getLocalDate,
-  setInitialStorage,
   updateLocalStorage,
   toggleLocalStorageItem,
   toggleIsDueStorageItems,
   clearCompletedStorageItems,
-} from '../helpers/helpers';
+} from '../helpers';
+import {
+  ADD_TODO,
+  TOGGLE_COMPLETED,
+  SET_IS_DUE,
+  CLEAR_COMPLETED,
+} from '../actions';
 
-const initialList = [
-  {
-    item: 'Learn about reducers',
-    completed: false,
-    dueDate: getLocalDate(new Date()),
-    isDue: true,
-    id: id(),
-  },
-];
-
-const initialState = {
-  todoList: setInitialStorage('todoList', initialList),
-};
-
-const todoListReducer = (currentState, { type, payload }) => {
+const todoListReducer = (state, { type, payload }) => {
   switch (type) {
-    case 'ADD_TODO': {
+    case ADD_TODO:
       return { todoList: updateLocalStorage('todoList', payload) };
-    }
-    case 'TOGGLE_COMPLETED': {
+    case TOGGLE_COMPLETED:
       return {
         todoList: toggleLocalStorageItem(
           'todoList',
@@ -35,16 +23,13 @@ const todoListReducer = (currentState, { type, payload }) => {
           payload.completedDate
         ),
       };
-    }
-    case 'SET_IS_DUE_TRUE': {
+    case SET_IS_DUE:
       return { todoList: toggleIsDueStorageItems('todoList', payload) };
-    }
-    case 'CLEAR_COMPLETED_ITEMS': {
+    case CLEAR_COMPLETED:
       return { todoList: clearCompletedStorageItems('todoList') };
-    }
     default:
-      return currentState;
+      return state;
   }
 };
 
-export { initialState, todoListReducer };
+export { todoListReducer };

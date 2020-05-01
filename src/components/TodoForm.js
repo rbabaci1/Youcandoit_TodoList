@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import DateTimePicker from 'react-datetime-picker';
-import { getLocalDate, setInitialStorage } from '../helpers/helpers';
+import { formatDate, setInitialStorage } from '../helpers';
 
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// notify the user that a todo is added
 const notifyAdded = () => {
   toast.info('Todo added!', {
     containerId: 'B',
@@ -19,6 +20,7 @@ const TodoForm = React.memo(({ addTodo }) => {
   const [userInput, setUserInput] = useState(
     setInitialStorage('userInput', '')
   );
+
   const [dueDate, setDueDate] = useState(new Date());
 
   useEffect(() => {
@@ -28,10 +30,9 @@ const TodoForm = React.memo(({ addTodo }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    addTodo(userInput, getLocalDate(dueDate));
+    addTodo(userInput, formatDate(dueDate));
     notifyAdded();
     setUserInput('');
-    setDueDate(new Date());
   };
 
   return (

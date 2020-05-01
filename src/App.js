@@ -1,16 +1,16 @@
 import React, { useReducer, useCallback } from 'react';
 import { v4 as id } from 'uuid';
-
-import { todoListReducer, initialState } from './reducers/reducer';
-import { checkIfThereIsACompletedTodo } from './helpers/helpers';
+import { todoListReducer } from './reducers/reducer';
+import { initialState } from './initialState';
+import { checkIfThereIsACompletedTodo } from './helpers';
+import {
+  ADD_TODO,
+  TOGGLE_COMPLETED,
+  SET_IS_DUE,
+  CLEAR_COMPLETED,
+} from './actions';
 import TodoList from './components/TodoList';
 import TodoForm from './components/TodoForm';
-
-// actions names
-const ADD_TODO = 'ADD_TODO';
-const TOGGLE_COMPLETED = 'TOGGLE_COMPLETED';
-const SET_IS_DUE_TRUE = 'SET_IS_DUE_TRUE';
-const CLEAR_COMPLETED_ITEMS = 'CLEAR_COMPLETED_ITEMS';
 
 function App() {
   const [state, dispatch] = useReducer(todoListReducer, initialState);
@@ -43,16 +43,13 @@ function App() {
 
   const toggleIsDue = useCallback(
     (todoId) => {
-      dispatch({
-        type: SET_IS_DUE_TRUE,
-        payload: todoId,
-      });
+      dispatch({ type: SET_IS_DUE, payload: todoId });
     },
     [dispatch]
   );
 
   const clearCompleted = () => {
-    dispatch({ type: CLEAR_COMPLETED_ITEMS });
+    dispatch({ type: CLEAR_COMPLETED });
   };
 
   return (
