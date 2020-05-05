@@ -44,9 +44,8 @@ const TodoForm = React.memo(({ addTodo }) => {
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
         />
+        <button disabled={!userInput}>Add</button>
       </label>
-
-      <button disabled={!userInput}>Add</button>
 
       <div className='date-time'>
         Add a due date:
