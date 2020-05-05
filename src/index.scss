@@ -25,8 +25,6 @@ code {
 }
 
 .App {
-  padding: 10px;
-
   h1 {
     text-align: center;
     font-family: 'Comic Neue';
@@ -119,6 +117,8 @@ code {
   }
 
   .todo-list {
+    padding: 10px;
+
     ol {
       list-style: none;
       counter-reset: item;
@@ -212,7 +212,7 @@ code {
 
   .clear-btn {
     background-color: rgb(236, 213, 150);
-    margin: 10px 0;
+    margin: 10px;
     padding: 5px 10px;
   }
 }
